@@ -1,6 +1,7 @@
 <p align="center">
-  <img src="https://cdn.svgporn.com/logos/docker-icon.svg" width="300" height="150"  alt="VueJS Logo"/>
-  <img src="https://cdn.svgporn.com/logos/vue.svg" width="300" height="150"  alt="Docker Logo"/>
+  <img src="https://cdn.svgporn.com/logos/docker-icon.svg" width="200" height="100"  alt="VueJS Logo"/>
+  <img src="https://cdn.svgporn.com/logos/vue.svg" width="200" height="100"  alt="Docker Logo"/>
+  <img src="https://cdn.svgporn.com/logos/drupal.svg" width="200" height="100"  alt="Drupal Logo"/>
 </p>
 
 ### Dockerizing Drupal && VueJS
