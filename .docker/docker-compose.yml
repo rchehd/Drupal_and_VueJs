@@ -1,0 +1,77 @@
+#version: '3.3'
+#
+#services:
+#  drupal:
+#    image: drupal:latest
+#    ports:
+#      - 80:80
+#    volumes:
+#      - drupal_modules:/var/www/html/modules
+#      - drupal_profiles:/var/www/html/profiles
+#      - drupal_themes:/var/www/html/themes
+#      - drupal_sites:/var/www/html/sites
+#    restart: always
+#
+#  postgres:
+#    image: postgres:10
+#    ports:
+#      - 54320:5432
+#    environment:
+#      POSTGRES_PASSWORD: password
+#    volumes:
+#      - db_data:/var/lib/postgresql/data
+#    restart: always
+#
+#volumes:
+#  drupal_modules:
+#  drupal_profiles:
+#  drupal_themes:
+#  drupal_sites:
+#  db_data:
+
+version: '3'
+services:
+
+  node:
+    image: wodby/node:$NODE_TAG
+    container_name: "${PROJECT_NAME}_node"
+    working_dir: /app
+    environment:
+      BACKEND_URL: ${BACKEND_URL}
+      DEBUG: ${NODE_DEBUG}
+    expose:
+      - "3000"
+    command: yarn start:dev
+
+  mariadb:
+    image: wodby/mariadb:$MARIADB_TAG
+    container_name: "${PROJECT_NAME}_mariadb"
+    stop_grace_period: 30s
+    environment:
+      MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+      MYSQL_DATABASE: $DB_NAME
+      MYSQL_USER: $DB_USER
+      MYSQL_PASSWORD: $DB_PASSWORD
+
+  php:
+    image: wodby/drupal-php:$PHP_TAG
+    container_name: "${PROJECT_NAME}_php"
+    environment:
+      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
+      DB_HOST: $DB_HOST
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB_NAME: $DB_NAME
+      DB_DRIVER: $DB_DRIVER
+
+  nginx:
+    image: wodby/nginx:$NGINX_TAG
+    container_name: "${PROJECT_NAME}_nginx"
+    depends_on:
+      - php
+    environment:
+      NGINX_STATIC_OPEN_FILE_CACHE: "off"
+      NGINX_ERROR_LOG_LEVEL: debug
+      NGINX_BACKEND_HOST: php
+      NGINX_SERVER_ROOT: /var/www/html/web
+      NGINX_VHOST_PRESET: drupal8
