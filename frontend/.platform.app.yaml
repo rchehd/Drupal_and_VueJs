@@ -33,6 +33,7 @@ hooks:
     yarn run build
   deploy: |
     echo "== DEPLOY SUCCESSFULLY COMPLETED $(date +"%d.%m.%Y %T") =="
+
 mounts:
   # Make whole build folder writable for build scripts purposes.
   '/run': 'shared:files/run'

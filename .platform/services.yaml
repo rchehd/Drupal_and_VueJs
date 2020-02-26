@@ -2,5 +2,5 @@
 # See https://docs.platform.sh/configuration/services.html
 
 mariadb:
-  type: "mysql:10.2"
-  disk: 2048
+    type: "mysql:10.2"
+    disk: 2048

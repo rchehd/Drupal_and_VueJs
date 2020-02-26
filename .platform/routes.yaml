@@ -3,14 +3,14 @@
 
 # Frontend.
 "http://{default}/":
-  type: redirect
-  to: "https://{default}/"
+    type: redirect
+    to: "https://{default}/"
 
 "https://{default}/":
-  type: upstream
-  upstream: "frontend:http"
+    type: upstream
+    upstream: "frontend:http"
 
 # Backend.
 "https://admin.{default}/":
-  type: upstream
-  upstream: "backend:http"
+    type: upstream
+    upstream: "backend:http"

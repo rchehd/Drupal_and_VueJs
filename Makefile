@@ -42,7 +42,7 @@ pull:
 
 up:
 	$(call message,$(PROJECT_NAME): Starting Docker containers...)
-	docker-compose up -d --remove-orphans
+	docker-compose up -d --remove-orphans --scale codecept=0
 
 stop:
 	$(call message,$(PROJECT_NAME): Stopping Docker containers...)
@@ -116,7 +116,9 @@ install:
 	$(call message,$(PROJECT_NAME): Installing Contenta CMS...)
 	$(call docker-www-data, php drush -r /var/www/html/web site-install contenta_jsonapi \
 		--db-url=mysql://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST)/$(DB_NAME) --site-name=$(PROJECT_NAME) --account-pass=admin --yes)
-# 	$(call message,$(PROJECT_NAME): Preparing test suite...)
+	$(call message,$(PROJECT_NAME): Preparing test suite...)
+	@$(MAKE) -s tests\:prepare
+	@$(MAKE) -s tests\:autocomplete
 	$(call message,$(PROJECT_NAME): The application is ready!)
 
 ######################################################
@@ -259,6 +261,25 @@ logs:
 # Testing framework commands #
 ##############################
 
+# tests\:prepare:
+# 	$(call message,$(PROJECT_NAME): Preparing Codeception framework for testing...)
+# 	docker-compose run --rm codecept build
+#
+# tests\:run:
+# 	$(call message,$(PROJECT_NAME): Running Codeception tests...)
+# 	$(eval ARGS := $(filter-out $@,$(MAKECMDGOALS)))
+# 	docker-compose run --rm codecept run $(ARGS) --debug
+#
+# tests\:cli:
+# 	$(call message,$(PROJECT_NAME): Opening Codeception container CLI...)
+# 	docker-compose run --rm --entrypoint bash codecept
+#
+# tests\:autocomplete:
+# 	$(call message,$(PROJECT_NAME): Copying Codeception codbasee in .codecept folder to enable IDE autocomplete...)
+# 	docker-compose up -d codecept
+# 	rm -rf .codecept
+# 	docker cp $(PROJECT_NAME)_codecept:/repo/ .codecept
+# 	rm -rf .codecept/.git
 
 # https://stackoverflow.com/a/6273809/1826109
 %:
