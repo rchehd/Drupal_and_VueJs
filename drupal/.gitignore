@@ -2,8 +2,8 @@
 /vendor
 /web/core
 /web/modules/contrib
-#/web/libraries
-#!/web/libraries/dropzone
+/web/libraries
+!/web/libraries/dropzone
 /web/profiles/contrib
 /web/themes/contrib
 

@@ -97,7 +97,7 @@ prepare\:backend:
 	$(call docker-root, php chmod 666 web/sites/default/settings.php)
 
 prepare\:frontend:
-	$(call message,$(PROJECT_NAME): Installing dependencies for React.js application...)
+	$(call message,$(PROJECT_NAME): Installing dependencies for VueJS application...)
 	docker-compose run --rm node yarn install
 
 prepare\:platformsh:
