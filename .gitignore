@@ -37,8 +37,19 @@ build/Release
 /frontend/**/jspm_packages/
 
 # MySQL files
+!/.docker/mysql
 /.docker/mysql/*
-!/.docker/mysql/
+
+# Drupal files
+/drupal/vendor
+/drupal/web/core
+/drupal/web/modules/contrib
+/drupal/web/libraries
+/drupal/web/profiles/contrib
+/drupal/web/themes/contrib
+/drupal/web/sites/default/files
+/drupal/web/private
+/drupal/keys
 
 # TypeScript v1 declaration files
 typings/

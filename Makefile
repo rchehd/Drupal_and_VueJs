@@ -116,9 +116,7 @@ install:
 	$(call message,$(PROJECT_NAME): Installing Contenta CMS...)
 	$(call docker-www-data, php drush -r /var/www/html/web site-install contenta_jsonapi \
 		--db-url=mysql://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST)/$(DB_NAME) --site-name=$(PROJECT_NAME) --account-pass=admin --yes)
-	$(call message,$(PROJECT_NAME): Preparing test suite...)
-	@$(MAKE) -s tests\:prepare
-	@$(MAKE) -s tests\:autocomplete
+# 	$(call message,$(PROJECT_NAME): Preparing test suite...)
 	$(call message,$(PROJECT_NAME): The application is ready!)
 
 ######################################################

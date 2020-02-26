@@ -1,6 +1,6 @@
 {
-  "name": "systemseed/drupal_reactjs_boilerplate",
-  "description": "Project template for quick start with headless Drupal and React.js",
+  "name": "nicer00ster/dockerize_drupal_vue",
+  "description": "Project template for quick start with headless Drupal and VueJS.",
   "type": "project",
   "license": "GPL-2.0-or-later",
   "authors": [
