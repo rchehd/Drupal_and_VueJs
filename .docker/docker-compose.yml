@@ -8,6 +8,10 @@ services:
     environment:
       BACKEND_URL: ${BACKEND_URL}
       DEBUG: ${NODE_DEBUG}
+    labels:
+      - 'traefik.backend=node'
+      - 'traefik.port=3000'
+      - 'traefik.frontend.rule=Host:${FRONTEND_HOST}, ${TESTS_FRONTEND_HOST}'
     expose:
       - "3000"
     command: yarn start:dev
@@ -44,43 +48,23 @@ services:
       NGINX_BACKEND_HOST: php
       NGINX_SERVER_ROOT: /var/www/html/web
       NGINX_VHOST_PRESET: drupal8
-#    labels:
-#      - 'traefik.backend=nginx'
-#      - 'traefik.port=80'
-#      - 'traefik.frontend.rule=Host:${BACKEND_HOST}, ${TESTS_BACKEND_HOST}'
+    labels:
+      - 'traefik.backend=nginx'
+      - 'traefik.port=80'
+      - 'traefik.frontend.rule=Host:${BACKEND_HOST}, ${TESTS_BACKEND_HOST}'
 
-#  traefik:
-#    image: traefik:1.7.16
-#    container_name: "${PROJECT_NAME}_traefik"
-#    command: -c /dev/null --web --docker --logLevel=INFO
-#    ports:
-#      - '80:80'
-#    volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock
-#    networks:
-#      default:
-#        aliases:
-#          - $FRONTEND_HOST
-#          - $BACKEND_HOST
-#          - $TESTS_FRONTEND_HOST
-#          - $TESTS_BACKEND_HOST
-#
-#  codecept:
-#    image: systemseed/codeception:2.4.5-1.0-drupal
-#    container_name: "${PROJECT_NAME}_codecept"
-#    environment:
-#      DB_HOST: ${DB_HOST}
-#      DB_USER: ${DB_USER}
-#      DB_PASSWORD: ${DB_PASSWORD}
-#      DB_NAME: ${DB_NAME}
-#      BACKEND_URL: ${TESTS_BACKEND_URL}
-#      FRONTEND_URL: ${TESTS_FRONTEND_URL}
-#      TEST_USERS_PASSWORD: ${TEST_USERS_PASSWORD}
-#      DEVELOPMENT_MODULES: ${DEVELOPMENT_MODULES}
-#
-#  chrome:
-#    image: selenium/standalone-chrome:3.14.0-arsenic
-#    container_name: "${PROJECT_NAME}_chrome"
-#    expose:
-#      - 4444
-#    shm_size: 2gb
+  traefik:
+    image: traefik:1.7.16
+    container_name: "${PROJECT_NAME}_traefik"
+    command: -c /dev/null --web --docker --logLevel=INFO
+    ports:
+      - '80:80'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      default:
+        aliases:
+          - $FRONTEND_HOST
+          - $BACKEND_HOST
+          - $TESTS_FRONTEND_HOST
+          - $TESTS_BACKEND_HOST
