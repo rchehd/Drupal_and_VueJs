@@ -35,6 +35,7 @@ build/Release
 # Dependency directories
 /frontend/node_modules/
 /frontend/**/jspm_packages/
+/frontend/.next/
 
 # MySQL files
 !/.docker/mysql
