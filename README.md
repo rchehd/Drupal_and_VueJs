@@ -19,11 +19,16 @@ To spin up the whole application for the first time in dev mode:
 ```sh
 $ git clone https://github.com/nicer00ster/dockerize-drupal-vue.git
 $ cd dockerize-drupal-vue
-# Start the docker containers
-$ docker-compose up -d
-# Setup drupal site (plan on doing this through docker)
-# Install VueJS and node dependencies
-$ cd frontend/src
-$ npm install
-$ npm run dev
+# 
+# Install all the docker containers:
+$ make install
+#
+# To destroy all containers and data associated:
+$ make down
+#
+# To pause the containers:
+$ make stop
+#
+# To bring the containers back up: 
+$ make up
 ```
