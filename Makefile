@@ -99,6 +99,7 @@ prepare\:backend:
 prepare\:frontend:
 	$(call message,$(PROJECT_NAME): Installing dependencies for VueJS application...)
 	docker-compose run --rm node yarn install
+	docker-compose run --rm node yarn compile:sass
 
 prepare\:platformsh:
 	$(call message,$(PROJECT_NAME): Setting Platform.sh git remote..)
