@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+<!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
+    <Test msg="Hello from test"></Test>
     <ul id="articles">
       <li v-for="article in articles" :key="article.id">
         {{ article.attributes.title }}
@@ -11,13 +12,14 @@
 </template>
 
 <script>
-  import HelloWorld from './components/HelloWorld.vue';
+  // import HelloWorld from './components/HelloWorld.vue';
+  import Test from './components/Test.vue';
   import axios from 'axios';
 
   export default {
     name: 'App',
     components: {
-      HelloWorld
+      Test
     },
     data() {
       return {
@@ -31,13 +33,7 @@
   }
 </script>
 
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  @import './css/main.css';
 </style>
